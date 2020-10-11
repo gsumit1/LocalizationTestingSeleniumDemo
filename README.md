@@ -8,7 +8,7 @@ For Automated Localization Testing, generally, we get the strings from the resou
 - One needs to load the resource files for each language is again time taking.
 
 As a part of this solution, we can use machine learning and natural language processing. 
-We can harness the power of very powerful tool [Lingua].
+We can harness the power of very powerful tool [Lingua](https://github.com/pemistahl/lingua).
 
 # Quick Info on Lingua
 - this library tries to solve language detection of very short words and phrases
@@ -42,7 +42,7 @@ We can harness the power of very powerful tool [Lingua].
         List<WebElement> allTextElement = driver
               .findElements(By.xpath("//*[string-length(normalize-space(text())) > 0]"));
 	
-- Use Lingua, to check 
+- Use Lingua, to check the translated text
 
     	final static LanguageDetector detector = LanguageDetectorBuilder
 			.fromLanguages(FRENCH, SPANISH, GERMAN, PORTUGUESE, ENGLISH).build();
@@ -55,6 +55,7 @@ We can harness the power of very powerful tool [Lingua].
           } else
             return false;
         }
+
 - Upon run, it will create a json file for the untranslated text for the particular page. Using the XPath, one can quickly naviagte to the element and analsysis if the untranslated text is expected. If it is expected, then marked flag valid as false and create a folder input_pt-br(input_lang in root) and keep it. From the second run itself it will ignore those expected texts.
 	```sh
 		{
@@ -68,4 +69,116 @@ We can harness the power of very powerful tool [Lingua].
 		  ]
 		}
 	```		
-[Lingua]: <https://github.com/pemistahl/lingua>
+### <a name="library-dependency-maven"></a> Using Maven to use Lingua
+
+```
+<dependency>
+    <groupId>com.github.pemistahl</groupId>
+    <artifactId>lingua</artifactId>
+    <version>1.0.2</version>
+</dependency>
+```
+
+### Which languages are supported? 
+
+Currently, the following 74 languages are supported by Lingua:
+
+- A
+  - Afrikaans
+  - Albanian
+  - Arabic
+  - Armenian
+  - Azerbaijani
+- B
+  - Basque
+  - Belarusian
+  - Bengali
+  - Norwegian Bokmal
+  - Bosnian
+  - Bulgarian
+- C
+  - Catalan
+  - Chinese
+  - Croatian
+  - Czech
+- D
+  - Danish
+  - Dutch
+- E
+  - English
+  - Esperanto
+  - Estonian
+- F
+  - Finnish
+  - French
+- G
+  - Ganda
+  - Georgian
+  - German
+  - Greek
+  - Gujarati
+- H
+  - Hebrew
+  - Hindi
+  - Hungarian
+- I
+  - Icelandic
+  - Indonesian
+  - Irish
+  - Italian
+- J
+  - Japanese
+- K
+  - Kazakh
+  - Korean
+- L
+  - Latin
+  - Latvian
+  - Lithuanian
+- M
+  - Macedonian
+  - Malay
+  - Marathi
+  - Mongolian
+- N
+  - Norwegian Nynorsk
+- P
+  - Persian
+  - Polish
+  - Portuguese
+  - Punjabi
+- R
+  - Romanian
+  - Russian
+- S
+  - Serbian
+  - Shona
+  - Slovak
+  - Slovene
+  - Somali
+  - Sotho
+  - Spanish
+  - Swahili
+  - Swedish
+- T
+  - Tagalog
+  - Tamil
+  - Telugu
+  - Thai
+  - Tsonga
+  - Tswana
+  - Turkish
+- U
+  - Ukrainian
+  - Urdu
+- V
+  - Vietnamese
+- W
+  - Welsh
+- X
+  - Xhosa
+- Y
+  - Yoruba
+- Z
+  - Zulu   
+
