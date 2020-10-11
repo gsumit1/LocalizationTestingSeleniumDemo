@@ -3,24 +3,24 @@
 For Automated Localization Testing, generally, we get the strings from the resource file then compare that with the extracted texts from the website using selenium or other tools.
 
 ## The problem with this approach is 
-- 1.One needs to write XPath or any other locator strategies to read individual strings from the web page is a bit cumbersome.
-- 2.Every time the content of the page changes, we need to update the locators.
-- 3.One needs to load the resource files for each language is again time taking.
+- One needs to write XPath or any other locator strategies to read individual strings from the web page is a bit cumbersome.
+- Every time the content of the page changes, we need to update the locators.
+- One needs to load the resource files for each language is again time taking.
 
 As a part of this solution, we can use machine learning and natural language processing. 
-We can harness the power of very powerful lool Lingua.
+We can harness the power of very powerful tool [Lingua].
 
-Quick Info on Lingua
-this library tries to solve language detection of very short words and phrases
-makes use of both statistical and rule-based approaches
-Language Detector for more than 70 languages
-works within every Java 6+ application and on Android
-no additional training of language models necessary
-offline usage without having to connect to an external service or API
+# Quick Info on Lingua
+- this library tries to solve language detection of very short words and phrases
+- makes use of both statistical and rule-based approaches
+- Language Detector for more than 70 languages
+- works within every Java 6+ application and on Android
+- no additional training of language models necessary
+- offline usage without having to connect to an external service or API
 
-So my solution is:
+## So my solution is:
 
-1. Keep all the target url in properties file and read one by one.
+- Keep all the target url in properties file and read one by one.
 
 		FileReader reader;
 		reader = new FileReader(System.getProperty("user.dir") + "\\" + "links.properties");
@@ -37,12 +37,12 @@ So my solution is:
 			page++;
 		}
 
-2. Extract all the text from the page using generic XPath
+- Extract all the text from the page using generic XPath
 
         List<WebElement> allTextElement = driver
               .findElements(By.xpath("//*[string-length(normalize-space(text())) > 0]"));
 	
-3. Use Lingua, to check 
+- Use Lingua, to check 
 
     	final static LanguageDetector detector = LanguageDetectorBuilder
 			.fromLanguages(FRENCH, SPANISH, GERMAN, PORTUGUESE, ENGLISH).build();
@@ -55,7 +55,8 @@ So my solution is:
           } else
             return false;
         }
-4. Upon run, it will create a json file for the untranslated text for the particular page. Using the XPath, one can quickly naviagte to the element and analsysis if the untranslated text is expected. If it is expected, then marked flag valid as false and create a folder input_pt-br(input_lang in root) and keep it. From the second run itself it will ignore those expected texts.
+- Upon run, it will create a json file for the untranslated text for the particular page. Using the XPath, one can quickly naviagte to the element and analsysis if the untranslated text is expected. If it is expected, then marked flag valid as false and create a folder input_pt-br(input_lang in root) and keep it. From the second run itself it will ignore those expected texts.
+```sh
 		{
 		  "https://www.lumen.com/pt-br/about/4th-industrial-revolution.html": [
 		    {
@@ -66,5 +67,5 @@ So my solution is:
 		    }
 		  ]
 		}
-		
-
+```		
+[Lingua]: <https://github.com/pemistahl/lingua>
