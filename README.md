@@ -1,4 +1,4 @@
-# LocalizationTestingSeleniumDemo
+# Localization Testing Selenium
 
 For Automated Localization Testing, generally, we get the strings from the resource file then compare that with the extracted texts from the website using selenium or other tools.
 
@@ -56,7 +56,7 @@ We can harness the power of very powerful tool [Lingua].
             return false;
         }
 - Upon run, it will create a json file for the untranslated text for the particular page. Using the XPath, one can quickly naviagte to the element and analsysis if the untranslated text is expected. If it is expected, then marked flag valid as false and create a folder input_pt-br(input_lang in root) and keep it. From the second run itself it will ignore those expected texts.
-```sh
+	```sh
 		{
 		  "https://www.lumen.com/pt-br/about/4th-industrial-revolution.html": [
 		    {
@@ -67,5 +67,5 @@ We can harness the power of very powerful tool [Lingua].
 		    }
 		  ]
 		}
-```		
+	```		
 [Lingua]: <https://github.com/pemistahl/lingua>
