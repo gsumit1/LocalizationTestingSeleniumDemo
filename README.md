@@ -22,20 +22,20 @@ So my solution is:
 
 1. Keep all the target url in properties file and read one by one.
 
-			FileReader reader;
-			reader = new FileReader(System.getProperty("user.dir") + "\\" + "links.properties");
-			Properties p = new Properties();
-			p.load(reader);
-			Set set = p.entrySet();
-			Iterator itr = set.iterator();
-			int page = 1;
-			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry) itr.next();
-				System.out.println("Page No: " + page);
-				L10nSteps LocalizationSteps = new L10nSteps();
-				LocalizationSteps.webPageCheck(driver, "https://www.att.com/" + lang + entry.getKey(), lang);
-				page++;
-			}
+		FileReader reader;
+		reader = new FileReader(System.getProperty("user.dir") + "\\" + "links.properties");
+		Properties p = new Properties();
+		p.load(reader);
+		Set set = p.entrySet();
+		Iterator itr = set.iterator();
+		int page = 1;
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry) itr.next();
+			System.out.println("Page No: " + page);
+			L10nSteps LocalizationSteps = new L10nSteps();
+			LocalizationSteps.webPageCheck(driver, "https://www.att.com/" + lang + entry.getKey(), lang);
+			page++;
+		}
 
 2. Extract all the text from the page using generic XPath
 
@@ -55,15 +55,16 @@ So my solution is:
           } else
             return false;
         }
-4. Create a json file for the untranslated text for the particular page
-        {
-          "https://www.lumen.com/pt-br/about/4th-industrial-revolution.html": [
-            {
-              "valid": "Y",
-              "xpath": "(//*[string-length(normalize-space(text())) > 0])[437]",
-              "index": 437,
-              "value": "Video Player is loading."
-            }
-          ]
-        }
+4. Upon run, it will create a json file for the untranslated text for the particular page. Using the XPath, one can quickly naviagte to the element and analsysis if the untranslated text is expected. If it is expected, then marked flag valid as false and create a folder input_pt-br(input_lang in root) and keep it. From the second run itself it will ignore those expected texts.
+		{
+		  "https://www.lumen.com/pt-br/about/4th-industrial-revolution.html": [
+		    {
+		      "valid": "Y",
+		      "xpath": "(//*[string-length(normalize-space(text())) > 0])[437]",
+		      "index": 437,
+		      "value": "Video Player is loading."
+		    }
+		  ]
+		}
+		
 
