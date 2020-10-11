@@ -17,3 +17,53 @@ Language Detector for more than 70 languages
 works within every Java 6+ application and on Android
 no additional training of language models necessary
 offline usage without having to connect to an external service or API
+
+So my solution is:
+
+1. Keep all the target url in properties file and read one by one.
+
+			FileReader reader;
+			reader = new FileReader(System.getProperty("user.dir") + "\\" + "links.properties");
+			Properties p = new Properties();
+			p.load(reader);
+			Set set = p.entrySet();
+			Iterator itr = set.iterator();
+			int page = 1;
+			while (itr.hasNext()) {
+				Map.Entry entry = (Map.Entry) itr.next();
+				System.out.println("Page No: " + page);
+				L10nSteps LocalizationSteps = new L10nSteps();
+				LocalizationSteps.webPageCheck(driver, "https://www.att.com/" + lang + entry.getKey(), lang);
+				page++;
+			}
+
+2. Extract all the text from the page using generic XPath
+
+        List<WebElement> allTextElement = driver
+              .findElements(By.xpath("//*[string-length(normalize-space(text())) > 0]"));
+	
+3. Use Lingua, to check 
+
+    	final static LanguageDetector detector = LanguageDetectorBuilder
+			.fromLanguages(FRENCH, SPANISH, GERMAN, PORTUGUESE, ENGLISH).build();
+      	Language detectedLanguage = detector.detectLanguageOf(tempStr);
+        
+        public boolean localCheck(String tempStr) {
+          Language detectedLanguage = detector.detectLanguageOf(tempStr);
+          if (detectedLanguage.toString().equals("ENGLISH")) {
+            return true;
+          } else
+            return false;
+        }
+4. Create a json file for the untranslated text for the particular page
+        {
+          "https://www.lumen.com/pt-br/about/4th-industrial-revolution.html": [
+            {
+              "valid": "Y",
+              "xpath": "(//*[string-length(normalize-space(text())) > 0])[437]",
+              "index": 437,
+              "value": "Video Player is loading."
+            }
+          ]
+        }
+
