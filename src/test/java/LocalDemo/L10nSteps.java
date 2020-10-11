@@ -20,14 +20,13 @@ import static com.github.pemistahl.lingua.api.Language.SPANISH;
 import static com.github.pemistahl.lingua.api.Language.GERMAN;
 import static com.github.pemistahl.lingua.api.Language.PORTUGUESE;
 import static com.github.pemistahl.lingua.api.Language.ENGLISH;
-import static com.github.pemistahl.lingua.api.Language.JAPANESE;
 import com.github.pemistahl.lingua.api.LanguageDetector;
 import com.github.pemistahl.lingua.api.LanguageDetectorBuilder;
 import com.jayway.jsonpath.JsonPath;
 
 public class L10nSteps {
 	final static LanguageDetector detector = LanguageDetectorBuilder
-			.fromLanguages(FRENCH, SPANISH, GERMAN, PORTUGUESE, ENGLISH, JAPANESE).build();
+			.fromLanguages(FRENCH, SPANISH, GERMAN, PORTUGUESE, ENGLISH).build();
 
 	@SuppressWarnings({ "unchecked" })
 	public void webPageCheck(WebDriver driver, String url, String lang) throws IOException, InterruptedException {
