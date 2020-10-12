@@ -56,7 +56,7 @@ We can harness the power of very powerful tool [Lingua](https://github.com/pemis
             return false;
         }
 
-- Upon run, it will create a json file for the untranslated text for the particular page. Using the XPath, one can quickly naviagte to the element and analsysis if the untranslated text is expected. If it is expected, then marked flag valid as false and create a folder input_pt-br(input_lang in root) and keep it. From the second run itself it will ignore those expected texts.
+- Upon run, it will create a JSON file for the untranslated text for the particular page. Using the XPath, one can quickly navigate to the element and analysis if the untranslated text is expected. If it is expected, then marked flag valid as false and create a folder input_pt-br(input_lang in root) and keep it. From the second run itself, it will ignore those expected texts.
 	```sh
 		{
 		  "https://www.lumen.com/pt-br/about/4th-industrial-revolution.html": [
