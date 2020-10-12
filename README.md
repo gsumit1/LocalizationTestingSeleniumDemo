@@ -1,4 +1,4 @@
-# Localization Testing Selenium
+# Localization Testing-Selenium, NLP & Machine Learning
 
 For Automated Localization Testing, generally, we get the strings from the resource file then compare that with the extracted texts from the website using selenium or other tools.
 
